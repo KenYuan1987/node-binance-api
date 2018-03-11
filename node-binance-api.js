@@ -464,6 +464,8 @@ LIMIT_MAKER
                     delete depthCache[symbol].asks[obj[0]];
                 }
             }
+	    depthCache[symbol].eventUpdateAmount = depth.u - depth.U
+	    depthCache[symbol].lastEventTime = depth.E
             context.lastEventUpdateId = depth.u;
         }
     };
@@ -899,7 +901,7 @@ LIMIT_MAKER
                         for ( let depth of context.messageQueue )
                             depthHandler(depth, json.lastUpdateId);
                         delete context.messageQueue;
-                        if ( callback ) callback(symbol, depthCache[symbol]);
+                        if ( callback ) callback(symbol, depthCache[symbol], );
                     });
                 };
                 // If an array of symbols are sent we use a combined stream connection rather.
